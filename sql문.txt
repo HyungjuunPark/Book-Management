@@ -1,0 +1,48 @@
+CREATE TABLE `book_info` (
+	`ISBN` varchar(13) NOT NULL,
+	`title` varchar(45) NOT NULL,
+	`author` varchar(45) NOT NULL,
+	`year` year NOT NULL,
+	`publisher` varchar(45) NOT NULL,
+	PRIMARY KEY (`ISBN`)
+);
+
+CREATE TABLE `member` (
+	`member_ID` int NOT NULL AUTO_INCREMENT,
+	`name` varchar(45) NOT NULL,
+	`addr` varchar(45) NOT NULL,
+	`tel` varchar(45) NOT NULL,
+	`birthday` date NOT NULL,
+	PRIMARY KEY (`member_ID`)
+);
+
+CREATE TABLE `books` (
+	`book_ID` int NOT NULL AUTO_INCREMENT,
+	`ISBN` varchar(13) NOT NULL,
+	`borrow` tinyint NOT NULL DEFAULT '0',
+	PRIMARY KEY (`book_ID`),
+	foreign key (`ISBN`) REFERENCES 	`book_info`(`ISBN`)
+);
+
+CREATE TABLE `borrows` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`book_id` int DEFAULT NULL,
+	`member_id` int DEFAULT NULL,
+	`b_date` date DEFAULT NULL,
+	`due_date` date DEFAULT NULL,
+	`extend` tinyint DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`book_id`) REFERENCES 	`books`(`book_id`),
+	FOREIGN KEY (`member_id`) REFERENCES 	`member`(`member_id`)
+);
+
+CREATE TABLE `reservation` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`book_id` int DEFAULT NULL,
+	`member_id` int DEFAULT NULL,
+	`r_date` date DEFAULT NULL,
+	PRIMARY KEY (`id`),
+	FOREIGN KEY (`book_id`) REFERENCES 	`books`(`book_id`),
+	FOREIGN KEY (`member_id`) REFERENCES 	`member`(`member_id`)
+);
+

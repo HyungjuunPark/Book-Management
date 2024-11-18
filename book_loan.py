@@ -131,7 +131,6 @@ def reservation_book(curs, book_ID, member_ID, custom_r_date=None):
             else:
                 # Use today's date without time
                 r_date = input("Enter the reservation date (YYYY-MM-DD): ")
-
             try:
                 # 입력받은 날짜가 유효한지 체크
                 datetime.datetime.strptime(r_date, "%Y-%m-%d")
